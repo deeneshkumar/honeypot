@@ -2,12 +2,12 @@
 
 This guide walks you through deploying the **Autonomous Agentic Honeypot** to Render.com so it can be accessed by the Endpoint Tester.
 
-## ✅ Prerequisites
+## Prerequisites
 - [x] Code pushed to GitHub (Repo: `deeneshkumar/honeypot`).
 - [x] Application has a `start` script (We just added this).
 - [x] Application listens on `process.env.PORT`.
 
-## 🛠️ Step-by-Step Deployment
+##  Step-by-Step Deployment
 
 1.  **Log in to Render**
     -   Go to [https://render.com](https://render.com).
@@ -41,8 +41,7 @@ This guide walks you through deploying the **Autonomous Agentic Honeypot** to Re
     -   Click **"Create Web Service"**.
     -   Wait 2-3 minutes for the build to finish.
     -   When you see "Your service is live", copy the URL (e.g., `https://honeypot-agent.onrender.com`).
-
-## 🧪 Validating the Deployment
+##  Validating the Deployment
 
 Once deployed, use the **Endpoint Tester** tool:
 
@@ -51,4 +50,4 @@ Once deployed, use the **Endpoint Tester** tool:
 -   **Headers**: `x-api-key: HONEYPOT_SECRET_KEY_123`
 -   **Body**: `{ "message": "Verify deployment" }`
 
-If you get a valid JSON response, you have **PASSED**! 🚀
+If you get a valid JSON response, you have **PASSED**! 
