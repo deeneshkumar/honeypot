@@ -1,0 +1,57 @@
+{
+  "session_id": "sess_1770216559732",
+  "is_scam": true,
+  "confidence": 0.7,
+  "extracted_data": {
+    "upi_ids": [
+      "verification@sbi"
+    ],
+    "bank_accounts": [],
+    "phone_numbers": [],
+    "phishing_links": []
+  },
+  "conversation_log": [
+    {
+      "sender": "scammer",
+      "text": "Hi, I am calling from the bank. Your KYC is pending.",
+      "timestamp": "2026-02-04T14:49:20.781Z"
+    },
+    {
+      "sender": "agent",
+      "text": "Hello? Who is this?",
+      "timestamp": "2026-02-04T14:49:20.814Z"
+    },
+    {
+      "sender": "scammer",
+      "text": "If you don't update it, your account will be blocked.",
+      "timestamp": "2026-02-04T14:49:22.832Z"
+    },
+    {
+      "sender": "agent",
+      "text": "I'm not sure I understand. Which bank is this regarding? I need to know before I can proceed.",
+      "timestamp": "2026-02-04T14:49:22.836Z"
+    },
+    {
+      "sender": "scammer",
+      "text": "Please pay 10rs verification fee to my UPI id: verification@sbi",
+      "timestamp": "2026-02-04T14:49:25.842Z"
+    },
+    {
+      "sender": "agent",
+      "text": "Okay, got it. Just to be safe, can you confirm the UPI (verification@sbi) again? My manager is asking.",
+      "timestamp": "2026-02-04T14:49:25.849Z"
+    },
+    {
+      "sender": "scammer",
+      "text": "Why are you not replying? Send immediately.",
+      "timestamp": "2026-02-04T14:49:27.857Z"
+    },
+    {
+      "sender": "agent",
+      "text": "I'm not sure I understand. Which bank is this regarding? I need to know before I can proceed.",
+      "timestamp": "2026-02-04T14:49:27.862Z"
+    }
+  ],
+  "explanation": "High likelihood of scam detected. Score: 0.70",
+  "action_recommendation": "Engage and extract details."
+}

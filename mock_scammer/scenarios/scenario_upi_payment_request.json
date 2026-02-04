@@ -1,0 +1,21 @@
+{
+    "description": "Scammer asks for payment via UPI",
+    "turns": [
+        {
+            "message": "Hi, I am calling from the bank. Your KYC is pending.",
+            "delay_ms": 1000
+        },
+        {
+            "message": "If you don't update it, your account will be blocked.",
+            "delay_ms": 2000
+        },
+        {
+            "message": "Please pay 10rs verification fee to my UPI id: verification@sbi",
+            "delay_ms": 3000
+        },
+        {
+            "message": "Why are you not replying? Send immediately.",
+            "delay_ms": 2000
+        }
+    ]
+}

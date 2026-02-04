@@ -1,0 +1,17 @@
+{
+    "description": "Scammer asks for bank transfer",
+    "turns": [
+        {
+            "message": "Sir you have won a lottery of 50 Lakhs.",
+            "delay_ms": 1000
+        },
+        {
+            "message": "To claim it, you need to deposit tax of 5000 rs.",
+            "delay_ms": 2000
+        },
+        {
+            "message": "Transfer to Account: 987654321012, IFSC: HDFC0001234",
+            "delay_ms": 3000
+        }
+    ]
+}

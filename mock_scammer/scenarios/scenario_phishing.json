@@ -1,0 +1,13 @@
+{
+    "description": "Scammer sends a phishing link",
+    "turns": [
+        {
+            "message": "Dear customer, your electricity bill is unpaid.",
+            "delay_ms": 500
+        },
+        {
+            "message": "Click here to pay immediately to avoid power cut: http://electricity-board-fake.com/pay",
+            "delay_ms": 1500
+        }
+    ]
+}
