@@ -9,24 +9,14 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-// Vercel sometimes pre-parses the body. Only use body-parser if req.body is missing or empty.
+// Vercel/Express Body Buffer Fix
+// 1. If req.body is already parsed (by Vercel), allow it.
+// 2. Otherwise use express.json()
 app.use((req, res, next) => {
-    if (req.body && Object.keys(req.body).length > 0) {
-        return next();
-    }
-    bodyParser.json()(req, res, next);
+    if (req.body) return next();
+    express.json()(req, res, next);
 });
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Handle JSON Parse Errors (e.g. invalid JSON from Tester)
-app.use((err, req, res, next) => {
-    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-        console.error('Bad JSON:', err.message);
-        return res.status(400).json({ error: 'Invalid JSON request body' });
-    }
-    next();
-});
+app.use(express.urlencoded({ extended: true }));
 
 // Load routes
 const sessionRoutes = require('./routes/session');
@@ -43,14 +33,25 @@ app.use('/', testRoutes);
 
 // Simple health check
 app.get('/', (req, res) => {
-    res.send('Autonomous Honeypot Server Running');
+    res.json({ status: "Autonomous Honeypot Server Running" });
 });
 
 // Ensure data directory exists
 const dataDir = path.join(__dirname, '../data');
 if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir);
+    try { fs.mkdirSync(dataDir); } catch (e) { }
 }
+
+// Global 404 Handler (Always return JSON)
+app.use((req, res) => {
+    res.status(404).json({ error: "Endpoint not found" });
+});
+
+// Global Error Handler (Always return JSON)
+app.use((err, req, res, next) => {
+    console.error("Server Error:", err);
+    res.status(err.status || 500).json({ error: err.message || "Internal Server Error" });
+});
 
 // Only start server if not running as a module (i.e. local dev)
 if (require.main === module) {
@@ -58,5 +59,6 @@ if (require.main === module) {
         console.log(`Server running on http://localhost:${PORT}`);
     });
 }
+
 
 module.exports = app;
