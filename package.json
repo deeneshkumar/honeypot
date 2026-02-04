@@ -8,6 +8,10 @@
     "test": "tests"
   },
   "scripts": {
+    "start": "node server/app.js",
+    "dev": "node server/app.js",
+    "mock": "node mock_scammer/mock_server.js",
+    "demo": "node demo_runner.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
