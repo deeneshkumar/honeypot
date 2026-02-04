@@ -8,7 +8,15 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(bodyParser.json());
+
+// Vercel sometimes pre-parses the body. Only use body-parser if req.body is missing or empty.
+app.use((req, res, next) => {
+    if (req.body && Object.keys(req.body).length > 0) {
+        return next();
+    }
+    bodyParser.json()(req, res, next);
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Handle JSON Parse Errors (e.g. invalid JSON from Tester)
