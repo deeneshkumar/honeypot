@@ -23,9 +23,15 @@ const validateApiKey = (req, res, next) => {
 
 // The Test Endpoint
 router.post('/api/honeypot/test', validateApiKey, (req, res) => {
-    // Basic mock analysis based on input
-    const incomingMessage = req.body.message || "No message provided";
-    const score = calculateScamScore(incomingMessage);
+    // Robustly handle missing body or parsing issues
+    const body = req.body || {};
+    // Ensure we handle case where message is inside a "data" or "content" field, or just raw
+    const incomingMessage = body.message || body.data || body.content || "No message content detected";
+
+    // Safety check for string conversion
+    const safeMessage = typeof incomingMessage === 'string' ? incomingMessage : JSON.stringify(incomingMessage);
+
+    const score = calculateScamScore(safeMessage);
 
     // Construct the required response structure for the tester
     const response = {

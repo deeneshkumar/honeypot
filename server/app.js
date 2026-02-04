@@ -9,6 +9,16 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Handle JSON Parse Errors (e.g. invalid JSON from Tester)
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+        console.error('Bad JSON:', err.message);
+        return res.status(400).json({ error: 'Invalid JSON request body' });
+    }
+    next();
+});
 
 // Load routes
 const sessionRoutes = require('./routes/session');
