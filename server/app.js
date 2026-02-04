@@ -9,6 +9,10 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
+// 🔹 Test endpoint FIRST (tester-safe)
+const testRoutes = require('./routes/test_endpoint');
+app.use('/', testRoutes);
+
 // Vercel/Express Body Buffer Fix
 // 1. If req.body is already parsed (by Vercel), allow it.
 // 2. Otherwise use express.json()
@@ -27,9 +31,7 @@ app.use('/', sessionRoutes);
 app.use('/', ingestRoutes);
 app.use('/', analyzeRoutes);
 
-// Test Endpoint (Secured)
-const testRoutes = require('./routes/test_endpoint');
-app.use('/', testRoutes);
+// Removed duplicate test route import from below
 
 // Simple health check
 app.get('/', (req, res) => {
