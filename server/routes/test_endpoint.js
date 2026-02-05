@@ -113,15 +113,36 @@ router.post(
         // Log for debugging
         console.log(`[Session ${sessionId}] Turn: ${session.turnCount}, ScamDetected: ${session.scamDetected}`);
 
-        // 5. Generate Agent Reply (Persona Logic)
+        // 5. Generate Agent Reply (Persona Logic with Rotation)
+        const replyOptions = {
+            initial: [
+                "Why is my account being suspended? I did not receive any prior notice.",
+                "I don't understand. Is this a mistake? My account should be fine.",
+                "Who is this? I haven't requested any changes to my account."
+            ],
+            follow_up: [
+                "I am worried. Can you explain exactly what verification is needed?",
+                "This sounds serious. What documents do I need to provide?",
+                "Is there a way to do this at my local branch? I prefer going in person."
+            ],
+            evasive: [
+                "This seems very unusual. Is there an official reference number for this case?",
+                "I'm trying to open the link but it says page not found. Can you check it?",
+                "My nephew works in IT, I really should ask him first before doing this."
+            ]
+        };
+
         let reply = "";
 
         if (session.turnCount === 1) {
-            reply = "Why is my account being suspended? I did not receive any prior notice.";
+            const responses = replyOptions.initial;
+            reply = responses[Math.floor(Math.random() * responses.length)];
         } else if (session.turnCount === 2) {
-            reply = "I am worried. Can you explain exactly what verification is needed so I don't make a mistake?";
+            const responses = replyOptions.follow_up;
+            reply = responses[Math.floor(Math.random() * responses.length)];
         } else {
-            reply = "This seems very unusual. Is there an official reference number for this case?";
+            const responses = replyOptions.evasive;
+            reply = responses[Math.floor(Math.random() * responses.length)];
         }
 
         // 6. Check Trigger for Callback
